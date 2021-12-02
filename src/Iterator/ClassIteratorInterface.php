@@ -46,8 +46,10 @@ interface ClassIteratorInterface extends \IteratorAggregate
 
     /**
      * Iterator yields classnames as keys and ReflectionClass objects as values
+     *
+     * @return \Traversable<mixed, mixed>
      */
-    public function getIterator(): iterable;
+    public function getIterator(): \Traversable;
 
     /**
      * Filter this iterator
@@ -72,7 +74,7 @@ interface ClassIteratorInterface extends \IteratorAggregate
     /**
      * Create iterator where classes are filtered based on method return value
      */
-    public function where(string $methodName, $expectedReturn = true): Filter;
+    public function where(string $methodName, bool $expectedReturn = true): Filter;
 
     /**
      * Register a negated filter

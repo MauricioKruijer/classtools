@@ -30,7 +30,7 @@ class MockSplFileInfo extends \hanneskod\classtools\Iterator\SplFileInfo
         return $this->path;
     }
 
-    public function getRealPath()
+    public function getRealPath(): string
     {
         return $this->path;
     }

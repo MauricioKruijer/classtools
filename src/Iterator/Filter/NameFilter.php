@@ -37,7 +37,7 @@ final class NameFilter extends ClassIterator implements Filter
         $this->pattern = $pattern;
     }
 
-    public function getIterator(): iterable
+    public function getIterator(): \Traversable
     {
         foreach ($this->getBoundIterator() as $className => $reflectedClass) {
             if (preg_match($this->pattern, $className)) {

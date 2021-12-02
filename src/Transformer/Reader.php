@@ -14,7 +14,6 @@ namespace hanneskod\classtools\Transformer;
 use hanneskod\classtools\Exception\RuntimeException;
 use hanneskod\classtools\Exception\ReaderException;
 use hanneskod\classtools\Name;
-use PhpParser\Lexer\Emulative;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Interface_;
 use PhpParser\Node\Stmt\Namespace_;
@@ -68,6 +67,8 @@ class Reader
 
     /**
      * Find class, interface and trait definitions in statemnts
+     * @param mixed[] $stmts
+     * @param Name $namespace
      */
     private function findDefinitions(array $stmts, Name $namespace): void
     {

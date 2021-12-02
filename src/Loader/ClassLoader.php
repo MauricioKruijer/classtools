@@ -21,12 +21,14 @@ use hanneskod\classtools\Iterator\ClassIterator;
 class ClassLoader
 {
     /**
-     * @var \hanneskod\classtools\Iterator\SplFileInfo[] Maps names to SplFileInfo objects
+     * @var array<class-string, \hanneskod\classtools\Iterator\SplFileInfo|\SplFileInfo> Maps names to SplFileInfo objects
      */
     private $classMap = [];
 
     /**
      * Load classmap at construct
+     * @param ClassIterator<mixed, mixed> $classIterator
+     * @param bool $register
      */
     public function __construct(ClassIterator $classIterator, bool $register = true)
     {

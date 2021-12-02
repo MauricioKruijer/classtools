@@ -32,7 +32,7 @@ use hanneskod\classtools\Exception\ReaderException;
 class ClassIterator implements ClassIteratorInterface
 {
     /**
-     * @var SplFileInfo[] Maps names to SplFileInfo objects
+     * @var array<class-string, \hanneskod\classtools\Iterator\SplFileInfo|\SplFileInfo> Maps names to SplFileInfo objects
      */
     private $classMap = [];
 
@@ -44,7 +44,7 @@ class ClassIterator implements ClassIteratorInterface
     /**
      * @var ClassLoader
      */
-    private $loader;
+    private ?ClassLoader $loader = null;
 
     /**
      * Scan filesystem for classes, interfaces and traits
@@ -55,6 +55,7 @@ class ClassIterator implements ClassIteratorInterface
         foreach (($finder ?: []) as $fileInfo) {
             $fileInfo = new SplFileInfo($fileInfo);
             try {
+                /** @var class-string $name */
                 foreach ($fileInfo->getReader()->getDefinitionNames() as $name) {
                     $this->classMap[$name] = $fileInfo;
                 }
@@ -77,6 +78,9 @@ class ClassIterator implements ClassIteratorInterface
         return $this->errors;
     }
 
+    /**
+     * @return array<class-string, \hanneskod\classtools\Iterator\SplFileInfo|\SplFileInfo>
+     */
     public function getClassMap(): array
     {
         return $this->classMap;
@@ -89,18 +93,19 @@ class ClassIterator implements ClassIteratorInterface
 
     public function disableAutoloading(): void
     {
-        if (isset($this->loader)) {
+        if ($this->loader) {
             $this->loader->unregister();
             unset($this->loader);
         }
     }
 
-    public function getIterator(): iterable
+    public function getIterator(): \Traversable
     {
         /** @var SplFileInfo $fileInfo */
         foreach ($this->getClassMap() as $name => $fileInfo) {
             try {
                 yield $name => new \ReflectionClass($name);
+                /** @phpstan-ignore-next-line */
             } catch (\ReflectionException $e) {
                 $msg = "Unable to iterate, {$e->getMessage()}, is autoloading enabled?";
                 throw new LogicException($msg, 0, $e);
@@ -129,7 +134,7 @@ class ClassIterator implements ClassIteratorInterface
         return $this->filter(new NamespaceFilter($namespace));
     }
 
-    public function where(string $methodName, $expectedReturn = true): Filter
+    public function where(string $methodName, bool $expectedReturn = true): Filter
     {
         return $this->filter(new WhereFilter($methodName, $expectedReturn));
     }

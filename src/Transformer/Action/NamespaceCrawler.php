@@ -15,6 +15,7 @@ use hanneskod\classtools\Name;
 use hanneskod\classtools\Exception\RuntimeException;
 use PhpParser\NodeVisitorAbstract;
 use PhpParser\Node;
+use PhpParser\Node\Name as PhpParserName;
 use PhpParser\Node\Name\FullyQualified;
 
 /**
@@ -59,7 +60,7 @@ class NamespaceCrawler extends NodeVisitorAbstract
      *
      * @throws RuntimeException If name can not be resolved
      */
-    public function leaveNode(Node $node)
+    public function leaveNode(Node $node): PhpParserName|null
     {
         if ($node instanceof FullyQualified) {
             $name = new Name((string)$node);
@@ -77,6 +78,8 @@ class NamespaceCrawler extends NodeVisitorAbstract
                 }
             }
         }
+
+        return null;
     }
 
     /**

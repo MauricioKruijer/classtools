@@ -25,7 +25,7 @@ final class NamespaceFilter extends ClassIterator implements Filter
     use FilterTrait;
 
     /**
-     * @var string
+     * @var mixed
      */
     private $namespace;
 
@@ -38,7 +38,10 @@ final class NamespaceFilter extends ClassIterator implements Filter
         $this->namespace = new Name((string)$namespace);
     }
 
-    public function getIterator(): iterable
+    /**
+     * @return \Traversable<mixed, mixed>
+     */
+    public function getIterator(): \Traversable
     {
         foreach ($this->getBoundIterator() as $className => $reflectedClass) {
             if ((new Name($className))->inNamespace($this->namespace)) {

@@ -24,9 +24,9 @@ final class CacheFilter extends ClassIterator implements Filter
     use FilterTrait;
 
     /**
-     * @var \ArrayIterator
+     * @var \ArrayIterator<int|string, mixed>
      */
-    private $cache;
+    private ?\ArrayIterator $cache = null;
 
     /**
      * Override ClassIterator::__construct
@@ -36,9 +36,9 @@ final class CacheFilter extends ClassIterator implements Filter
         parent::__construct();
     }
 
-    public function getIterator(): iterable
+    public function getIterator(): \Traversable
     {
-        if (!isset($this->cache)) {
+        if (!$this->cache) {
             $this->cache = new \ArrayIterator(iterator_to_array($this->getBoundIterator()));
         }
 

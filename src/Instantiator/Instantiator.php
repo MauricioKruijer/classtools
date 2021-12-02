@@ -23,7 +23,7 @@ class Instantiator
     /**
      * @var \ReflectionClass
      */
-    private $class;
+    private ?\ReflectionClass $class = null;
 
     /**
      * Set class to instantiate
@@ -40,7 +40,7 @@ class Instantiator
      */
     public function getReflectionClass(): \ReflectionClass
     {
-        if (!isset($this->class)) {
+        if (!$this->class) {
             throw new LogicException("Reflected class not loaded");
         }
         return $this->class;
@@ -76,7 +76,7 @@ class Instantiator
     /**
      * Create instance
      *
-     * @param  array          $args Optional constructor arguments
+     * @param  mixed[]          $args Optional constructor arguments
      * @return mixed          Instance of reflected class
      * @throws LogicException If reflected class is not instantiable
      */

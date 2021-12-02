@@ -46,7 +46,10 @@ final class WhereFilter extends ClassIterator implements Filter
         $this->returnValue = $returnValue;
     }
 
-    public function getIterator(): iterable
+    /**
+     * @return \Traversable<mixed, mixed>
+     */
+    public function getIterator(): \Traversable
     {
         $methodName = $this->methodName;
         foreach ($this->getBoundIterator() as $className => $reflectedClass) {

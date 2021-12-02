@@ -13,7 +13,6 @@ namespace hanneskod\classtools\Iterator\Filter;
 
 use hanneskod\classtools\Iterator\ClassIterator;
 use hanneskod\classtools\Iterator\Filter;
-use ReflectionException;
 
 /**
  * Filter classes of a spefcified type
@@ -35,7 +34,10 @@ final class TypeFilter extends ClassIterator implements Filter
         $this->typename = $typename;
     }
 
-    public function getIterator(): iterable
+    /**
+     * @return \Traversable<mixed, mixed>
+     */
+    public function getIterator(): \Traversable
     {
         foreach ($this->getBoundIterator() as $className => $reflectedClass) {
             try {

@@ -30,7 +30,7 @@ class SplFileInfo extends FinderSplFileInfo
     /**
      * @var Reader
      */
-    private $reader;
+    private ?Reader $reader;
 
     /**
      * Load decorated object
@@ -215,9 +215,9 @@ class SplFileInfo extends FinderSplFileInfo
      *
      * @return string
      */
-    public function getRealPath()
+    public function getRealPath(): string
     {
-        return $this->decorated->getRealPath();
+        return $this->decorated->getRealPath() ?: '';
     }
 
     /**

@@ -25,7 +25,7 @@ trait FilterTrait
     /**
      * @var ClassIteratorInterface Iterator filter is bound to
      */
-    private $boundIterator;
+    private ?ClassIteratorInterface $boundIterator = null;
 
     public function bindTo(ClassIteratorInterface $iterator): void
     {
@@ -34,7 +34,7 @@ trait FilterTrait
 
     public function getBoundIterator(): ClassIteratorInterface
     {
-        if (!isset($this->boundIterator)) {
+        if (!$this->boundIterator) {
             throw new LogicException("Filter not bound to iterator.");
         }
         return $this->boundIterator;
@@ -60,5 +60,5 @@ trait FilterTrait
     /**
      * Get current iterator
      */
-    abstract public function getIterator(): iterable;
+    abstract public function getIterator(): \Traversable;
 }

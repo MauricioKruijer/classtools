@@ -24,5 +24,7 @@ class CommentStripper extends NodeVisitorAbstract
     public function leaveNode(Node $node)
     {
         $node->setAttribute('comments', []);
+
+        return null;
     }
 }

@@ -11,6 +11,7 @@ declare(strict_types = 1);
 
 namespace hanneskod\classtools\Transformer;
 
+use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitor;
 use PhpParser\Error as PhpParserException;
@@ -58,7 +59,8 @@ class Writer
     /**
      * Generate new code snippet
      *
-     * @throws RuntimeException If code generation failes
+     * @param Namespace_[] $statements
+     * @return string
      */
     public function write(array $statements): string
     {
