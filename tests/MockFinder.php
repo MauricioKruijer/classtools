@@ -13,7 +13,7 @@ class MockFinder extends \Symfony\Component\Finder\Finder
         self::$iterator = $iterator;
     }
 
-    public function getIterator()
+    public function getIterator(): \Iterator|\AppendIterator
     {
         return self::$iterator;
     }

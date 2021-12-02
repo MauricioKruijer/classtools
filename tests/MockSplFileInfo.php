@@ -6,7 +6,10 @@ namespace hanneskod\classtools\Tests;
 
 class MockSplFileInfo extends \hanneskod\classtools\Iterator\SplFileInfo
 {
-    public function __construct($contents)
+    private string $contents;
+    private string $path;
+
+    public function __construct(string $contents)
     {
         $this->contents = $contents;
         $tempnam = tempnam(sys_get_temp_dir(), 'CLASSTOOLS_');
@@ -32,7 +35,7 @@ class MockSplFileInfo extends \hanneskod\classtools\Iterator\SplFileInfo
         return $this->path;
     }
 
-    public function getContents()
+    public function getContents(): string
     {
         return $this->contents;
     }

@@ -79,7 +79,7 @@ class SplFileInfo extends FinderSplFileInfo
      *
      * @return string
      */
-    public function getContents()
+    public function getContents(): string
     {
         return (string)$this->decorated->getContents();
     }
@@ -153,7 +153,7 @@ class SplFileInfo extends FinderSplFileInfo
     /**
      * Gets the target of a filesystem link
      */
-    public function getLinkTarget(): sring
+    public function getLinkTarget(): string
     {
         return $this->decorated->getLinkTarget();
     }
