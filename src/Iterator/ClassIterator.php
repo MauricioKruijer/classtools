@@ -32,7 +32,8 @@ use hanneskod\classtools\Exception\ReaderException;
 class ClassIterator implements ClassIteratorInterface
 {
     /**
-     * @var array<class-string, \hanneskod\classtools\Iterator\SplFileInfo|\SplFileInfo> Maps names to SplFileInfo objects
+     * Maps names to SplFileInfo objects
+     * @var array<class-string, \hanneskod\classtools\Iterator\SplFileInfo|\SplFileInfo>
      */
     private $classMap = [];
 

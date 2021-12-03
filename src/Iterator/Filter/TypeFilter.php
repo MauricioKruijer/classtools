@@ -46,8 +46,7 @@ final class TypeFilter extends ClassIterator implements Filter
                 }
             } catch (\ReflectionException $e) {
                 try {
-                    if (
-                        $reflectedClass->isSubclassOf($this->typename)
+                    if ($reflectedClass->isSubclassOf($this->typename)
                         || $reflectedClass->getName() == $this->typename
                     ) {
                         yield $className => $reflectedClass;
