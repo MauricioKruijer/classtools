@@ -22,7 +22,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ubuntu-latest, windows-latest, macOS-latest]
-        php-versions: ['8.0', '8.1']    
+        php-versions: ['8.0', '8.1']
     name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -33,16 +33,20 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
-        
+
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
           extensions: intl #optional
           tools: phpstan, phpunit
-      - name: Check PHP Version
-        run: php -v
-      
+
+      - name: Run tests
+        run: phpunit
+
+      - name: Run phpstan
+        run: phpstan
+
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
