@@ -35,10 +35,13 @@ jobs:
         with:
           php-version: ${{ matrix.php-versions }}
           extensions: intl #optional
-          tools: phpstan, phpunit
+          tools: phpcs, phpstan, phpunit
 
       - name: Composer install
         run: composer install
+
+      - name: Run phpcs
+        run: phpcs src --standard=PSR2
 
       - name: Run tests
         run: phpunit
